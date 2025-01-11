@@ -13,7 +13,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
     @Override
     public User addUser(User user) {
@@ -45,6 +45,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Integer userId) {
         userDao.deleteById(userId);
+    }
+
+    @Override
+    public User getUserByNameAndPwd(User user) {
+        String username=user.getUsername();
+        String password=user.getPassword();
+        return userDao.findUserByUsernameAndPassword(username,password);
     }
 
 }
