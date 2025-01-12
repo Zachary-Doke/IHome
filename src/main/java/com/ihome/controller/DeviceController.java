@@ -33,7 +33,7 @@ public class DeviceController {
     }
 
     //更新设备信息
-    @PutMapping("/updateDevice ")
+    @PutMapping("/updateDevice")
     public ResponseMessage<Device> updateDevice(@RequestBody Device device) {
         Device result=deviceService.updateDevice(device);
         return ResponseMessage.success(result);
@@ -137,7 +137,7 @@ public class DeviceController {
 
     //自动调节
     public String autoAdjustment () {
-        return "此方法为后台AI功能调用";
+        return "此方法为后端AI功能调用";
     }
 
     //人脸识别

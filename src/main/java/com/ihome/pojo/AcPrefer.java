@@ -1,17 +1,20 @@
 package com.ihome.pojo;
 
+
+
+import java.io.Serializable;
+
+import java.util.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.io.Serializable;
-import java.util.Date;
 
-@Table(name = "light_prefer")
+@Table(name = "ac_prefer")
 @Entity
 @Data
-public class LightPrefer implements Serializable {
+public class AcPrefer implements Serializable {
 
     /**
     * 记录ID
@@ -27,19 +30,20 @@ public class LightPrefer implements Serializable {
     */
     private Integer deviceId;
     /**
-    * 灯光亮度
+    * 空调参数
     */
-    private String brightness;
+    private String parameters;
     /**
-    * 灯光颜色
+    * 起始环境温度
     */
-    private String color;
+    private String temperature;
     /**
-    * 起始时间
+    * 启动时间
     */
     private Date startTime;
     /**
     * 结束时间
     */
     private Date endTime;
+
 }
