@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/faceData")
+@RestController
+@RequestMapping("/faceData")
 public class FaceDataController {
     @Autowired
     private FaceDataService faceDataService;

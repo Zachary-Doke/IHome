@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.*;
 import java.util.List;
 
-@RestController("/device")
+@RestController
+@RequestMapping("/device")
 public class DeviceController {
     @Autowired
     private DeviceService deviceService;

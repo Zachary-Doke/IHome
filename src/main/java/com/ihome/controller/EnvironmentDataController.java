@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/environmentData")
+@RestController
+@RequestMapping("/environmentData")
 public class EnvironmentDataController {
     @Autowired
     private EnvironmentDataService environmentDataService;

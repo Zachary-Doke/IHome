@@ -35,4 +35,43 @@ public class AcPrediction implements Serializable {
     */
     private Date create;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(Integer deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public String getAdjustment() {
+        return adjustment;
+    }
+
+    public void setAdjustment(String adjustment) {
+        this.adjustment = adjustment;
+    }
+
+    public Double getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Double parameters) {
+        this.parameters = parameters;
+    }
+
+    public Date getCreate() {
+        return create;
+    }
+
+    public void setCreate(Date create) {
+        this.create = create;
+    }
 }

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/lightPrefer")
+@RestController
+@RequestMapping("/lightPrefer")
 public class LightPreferController {
     @Autowired
     private LightPreferService lightPreferService;

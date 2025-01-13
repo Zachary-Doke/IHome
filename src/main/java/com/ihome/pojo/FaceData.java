@@ -26,4 +26,27 @@ public class FaceData implements Serializable {
     */
     private byte[] faceFeature;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public byte[] getFaceFeature() {
+        return faceFeature;
+    }
+
+    public void setFaceFeature(byte[] faceFeature) {
+        this.faceFeature = faceFeature;
+    }
 }

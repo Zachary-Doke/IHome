@@ -42,4 +42,60 @@ public class FaceRecognitionLog implements Serializable {
     * 识别时间
     */
     private Date create;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(Integer deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public Integer getRecognizedId() {
+        return recognizedId;
+    }
+
+    public void setRecognizedId(Integer recognizedId) {
+        this.recognizedId = recognizedId;
+    }
+
+    public Double getConfidence() {
+        return confidence;
+    }
+
+    public void setConfidence(Double confidence) {
+        this.confidence = confidence;
+    }
+
+    public String getAccessStatu() {
+        return accessStatu;
+    }
+
+    public void setAccessStatu(String accessStatu) {
+        this.accessStatu = accessStatu;
+    }
+
+    public String getCapturedImagePath() {
+        return capturedImagePath;
+    }
+
+    public void setCapturedImagePath(String capturedImagePath) {
+        this.capturedImagePath = capturedImagePath;
+    }
+
+    public Date getCreate() {
+        return create;
+    }
+
+    public void setCreate(Date create) {
+        this.create = create;
+    }
 }

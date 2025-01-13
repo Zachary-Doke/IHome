@@ -12,7 +12,8 @@ import java.util.List;
 
 
 
-@RestController("/acPrefer")
+@RestController
+@RequestMapping("/acPrefer")
 public class AcPreferController {
     @Autowired
     private AcPreferService acPreferService;

@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/faceRecognitionLog")
+@RestController
+@RequestMapping("/faceRecognitionLog")
 public class FaceRecognitionLogController {
     @Autowired
     private FaceRecognitionLogService faceRecognitionLogService;
