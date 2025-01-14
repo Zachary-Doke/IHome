@@ -27,7 +27,7 @@ import java.util.concurrent.ExecutorService;
 
 @Component
 public class AmqpClient implements ApplicationRunner {
-    private final static Logger logger = (Logger) LoggerFactory.getLogger(AmqpClient.class);
+    private final static Logger logger = LoggerFactory.getLogger(AmqpClient.class);
 
     @Autowired
     private AliIotConfigProperties aliIotConfigProperties;
