@@ -1,6 +1,5 @@
 package com.ihome.controller;
 
-import com.ihome.pojo.Device;
 import com.ihome.pojo.FaceRecognitionLog;
 import com.ihome.pojo.ResponseMessage;
 import com.ihome.service.FaceRecognitionLogService;

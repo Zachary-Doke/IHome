@@ -2,7 +2,6 @@ package com.ihome.controller;
 
 import com.ihome.pojo.AcPrediction;
 import com.ihome.pojo.ResponseMessage;
-import com.ihome.pojo.User;
 import com.ihome.service.AcPredictionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

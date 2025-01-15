@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface UserDao extends CrudRepository<User, Integer> {
 
     User findUserByUsernameAndPassword(String username, String password);
+
 }

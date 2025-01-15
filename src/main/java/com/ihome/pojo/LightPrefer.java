@@ -1,8 +1,6 @@
 package com.ihome.pojo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,6 +15,7 @@ public class LightPrefer implements Serializable {
     * 记录ID
     */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     /**
     * 用户ID

@@ -2,7 +2,6 @@ package com.ihome.controller;
 
 import com.ihome.pojo.EnvironmentData;
 import com.ihome.pojo.ResponseMessage;
-import com.ihome.pojo.User;
 import com.ihome.service.EnvironmentDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

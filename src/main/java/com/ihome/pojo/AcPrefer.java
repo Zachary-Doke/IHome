@@ -5,9 +5,8 @@ package com.ihome.pojo;
 import java.io.Serializable;
 
 import java.util.Date;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.Data;
 
 
@@ -20,6 +19,7 @@ public class AcPrefer implements Serializable {
     * 记录ID
     */
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     /**
     * 用户ID

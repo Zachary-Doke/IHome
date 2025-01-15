@@ -1,6 +1,5 @@
 package com.ihome.controller;
 
-import com.ihome.pojo.AcPrediction;
 import com.ihome.pojo.Command;
 import com.ihome.pojo.ResponseMessage;
 import com.ihome.service.CommandService;
