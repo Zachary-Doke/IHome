@@ -74,7 +74,7 @@ public class ExtractFrame {
             }
 
             // 转换Mat对象为byte数组并处理帧
-            String fileName = String.format("E:/uploads/face1_%05d.png", frameIndex++);
+            String fileName = String.format("E:/uploads/"+video.getOriginalFilename()+"_%05d.png", frameIndex++);
             imwrite(fileName, frame);
             imageNameList.add(fileName);
         }
