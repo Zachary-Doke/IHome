@@ -18,6 +18,26 @@ public class ExtractFrame {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
 
+    public String extractImage(MultipartFile image) {
+        if (image.isEmpty()) {
+            System.out.println("图片文件为空");
+        }
+        String uploadDir = "E:/uploads/";
+        File directory = new File(uploadDir);
+        if (!directory.exists()) {
+            directory.mkdirs(); // 创建目录
+        }
+        String filePath = uploadDir + image.getOriginalFilename();
+        try {
+            image.transferTo(new File(filePath)); // 保存视频
+            System.out.println("图片保存路径：" + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("图片保存失败");
+        }
+        return filePath;
+    }
+
     public List<String> extractFrame(MultipartFile video) {
         //保存视频为文件
         if (video.isEmpty()) {

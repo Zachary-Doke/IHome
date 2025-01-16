@@ -27,7 +27,7 @@ public class ArcFaceService {
 
         // 配置引擎模式为image
         EngineConfiguration engineConfiguration = new EngineConfiguration();
-        engineConfiguration.setDetectMode(DetectMode.ASF_DETECT_MODE_IMAGE); // 视频模式
+        engineConfiguration.setDetectMode(DetectMode.ASF_DETECT_MODE_IMAGE); //照片模式
 
         // 设置检测方向和最大人脸数
         engineConfiguration.setDetectFaceOrientPriority(DetectOrient.ASF_OP_ALL_OUT);
@@ -72,21 +72,22 @@ public class ArcFaceService {
         System.out.println("检测到人脸数:" + faceInfoList.size());
 
         //特征提取
-        FaceFeature faceFeature = new FaceFeature();
-        errorCode = faceEngine.extractFaceFeature(imageInfo, faceInfoList.get(0), ExtractType.RECOGNIZE, 0, faceFeature);
+        FaceFeature targetFaceFeature = new FaceFeature();
+        errorCode = faceEngine.extractFaceFeature(imageInfo, faceInfoList.get(0), ExtractType.RECOGNIZE, 0, targetFaceFeature);
         System.out.println("特征提取errorCode:" + errorCode);
 
         //获取库中人脸特征
-        FaceData faceData =arcFaceDao.findByUserId(userId).orElseThrow(() -> {
+        FaceData sourceFaceData =arcFaceDao.findByUserId(userId).orElseThrow(() -> {
             throw new IllegalArgumentException("用户不存在,参数异常");
         });
 
         //特征比对
         FaceFeature sourceFaceFeature = new FaceFeature();
-        sourceFaceFeature.setFeatureData(faceData.getFaceFeature());
+        sourceFaceFeature.setFeatureData(sourceFaceData.getFaceFeature());
         FaceSimilar faceSimilar = new FaceSimilar();
 
-        errorCode = faceEngine.compareFaceFeature(faceFeature, sourceFaceFeature, faceSimilar);
+        errorCode = faceEngine.compareFaceFeature(targetFaceFeature, sourceFaceFeature, faceSimilar);
+        System.out.println("特征相同："+targetFaceFeature.getFeatureData().equals(sourceFaceFeature.getFeatureData()));
         System.out.println("特征比对errorCode:" + errorCode);
         System.out.println("人脸相似度：" + faceSimilar.getScore());
 
@@ -96,15 +97,12 @@ public class ArcFaceService {
 
     //人脸注册
     public void addFace(List<String> imagePathList,Integer userId) {
-        FaceEngine faceEngine=imageEngineInit();
-        if (faceEngine == null) {
-            System.out.println("FaceEngine not initialized.");
-            return ;
-        }
+
 
         //对每张照片分别提取人脸特征
         List<FaceFeature> featureList = new ArrayList<>();
         for (String imagePath : imagePathList){
+            FaceEngine faceEngine=imageEngineInit();
 
             //封装帧为ImageInfo
             File image = new File(imagePath);
@@ -122,6 +120,8 @@ public class ArcFaceService {
             errorCode = faceEngine.extractFaceFeature(imageInfo, faceInfoList.get(0), ExtractType.RECOGNIZE, 0, faceFeature);
             System.out.println("特征提取errorCode:" + errorCode);
             featureList.add(faceFeature);
+
+            destroy(faceEngine);
         }
 
         //特征融合
@@ -157,7 +157,7 @@ public class ArcFaceService {
         faceData.setFaceFeature(finalFeatureData);
         arcFaceDao.save(faceData);
 
-        destroy(faceEngine);
+
     }
 
 

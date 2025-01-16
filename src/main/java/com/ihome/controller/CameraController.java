@@ -18,8 +18,8 @@ public class CameraController {
     private ArcFaceService arcFaceService;
 
     //人脸比对
-    @PostMapping("/faceCompare")
-    public ResponseMessage<Boolean> faceCompare(@RequestParam("video") MultipartFile video, @RequestParam Integer userId) {
+    @PostMapping("/faceVideoCompare")
+    public ResponseMessage<Boolean> faceVideoCompare(@RequestParam("video") MultipartFile video, @RequestParam Integer userId) {
 
         //获取视频流，转为帧
         List<String> imagePathList =new ExtractFrame().extractFrame(video);
@@ -34,6 +34,23 @@ public class CameraController {
                 flag=true;
                 break;
             }
+        }
+        return ResponseMessage.success(flag);
+    }
+
+    @PostMapping("/faceImageCompare")
+    public ResponseMessage<Boolean> faceImageCompare(@RequestParam("image") MultipartFile image, @RequestParam Integer userId) {
+
+        //获取视频流，转为帧
+        String imagePath =new ExtractFrame().extractImage(image);
+
+
+        //每帧人脸识别
+        float confidence = 0;
+        Boolean flag=false;
+        confidence=arcFaceService.faceRecognition(imagePath,userId);
+        if (confidence>0.8){
+            flag=true;
         }
         return ResponseMessage.success(flag);
     }
