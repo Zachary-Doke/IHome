@@ -31,8 +31,8 @@ public class AcPreferServiceImpl implements AcPreferService {
     }
 
     @Override
-    public List<AcPrefer> getRecordList() {
-        Iterable<AcPrefer> iterator = acPreferDao.findAll();
+    public List<AcPrefer> getRecordList(Integer deviceId) {
+        Iterable<AcPrefer> iterator = acPreferDao.findAllByDeviceId(deviceId);
         List<AcPrefer> recordList=new ArrayList<>();
         for(AcPrefer acPrefer:iterator){
             recordList.add(acPrefer);

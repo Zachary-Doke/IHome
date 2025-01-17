@@ -31,8 +31,8 @@ public class LightPreferServiceImpl implements LightPreferService {
     }
 
     @Override
-    public List<LightPrefer> getRecordList() {
-        Iterable<LightPrefer> iterator = lightPreferDao.findAll();
+    public List<LightPrefer> getRecordList(Integer deviceId) {
+        Iterable<LightPrefer> iterator = lightPreferDao.findAllByDeviceId(deviceId);
         List<LightPrefer> recordList=new ArrayList<>();
         for(LightPrefer lightPrefer:iterator){
             recordList.add(lightPrefer);

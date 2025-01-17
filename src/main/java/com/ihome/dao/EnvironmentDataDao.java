@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EnvironmentDataDao extends CrudRepository<EnvironmentData, Integer> {
+    Iterable<EnvironmentData> findAllBydeviceId(Integer deviceId);
 }

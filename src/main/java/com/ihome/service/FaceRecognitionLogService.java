@@ -1,6 +1,7 @@
 package com.ihome.service;
 
 import com.ihome.pojo.FaceRecognitionLog;
+import jakarta.persistence.criteria.CriteriaBuilder;
 
 import java.util.List;
 
@@ -22,5 +23,5 @@ public interface FaceRecognitionLogService {
      * 获取记录列表
      * @return
      */
-    List<FaceRecognitionLog> getRecordList();
+    List<FaceRecognitionLog> getRecordList(Integer deviceId);
 }

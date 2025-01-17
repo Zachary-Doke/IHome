@@ -26,8 +26,8 @@ public class FaceRecognitionLogServiceImpl implements FaceRecognitionLogService 
     }
 
     @Override
-    public List<FaceRecognitionLog> getRecordList() {
-        Iterable<FaceRecognitionLog> iterator = faceRecognitionLogDao.findAll();
+    public List<FaceRecognitionLog> getRecordList(Integer deviceId) {
+        Iterable<FaceRecognitionLog> iterator = faceRecognitionLogDao.findAllByDeviceId(deviceId);
         List<FaceRecognitionLog> faceRecognitionLogList=new ArrayList<>();
         for(FaceRecognitionLog faceRecognitionLog:iterator){
             faceRecognitionLogList.add(faceRecognitionLog);

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LightPreferDao extends CrudRepository<LightPrefer, Integer> {
+    Iterable<LightPrefer> findAllByDeviceId(Integer deviceId);
 }

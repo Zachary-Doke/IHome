@@ -3,6 +3,7 @@ package com.ihome.controller;
 import com.ihome.pojo.EnvironmentData;
 import com.ihome.pojo.ResponseMessage;
 import com.ihome.service.EnvironmentDataService;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +38,7 @@ public class EnvironmentDataController {
 
     //获取环境数据
     @GetMapping("/getEnvironmentData")
-    public ResponseMessage<EnvironmentData> getEnvironmentData() {
+    public ResponseMessage<EnvironmentData> getEnvironmentData(@RequestParam Integer deviceId) {
         EnvironmentData data=new EnvironmentData();
 
         /*向设备发送查询环境数据请求并接收*/
@@ -48,8 +49,8 @@ public class EnvironmentDataController {
 
     //获取环境数据列表
     @GetMapping("/getEnvironmentDataList")
-    public ResponseMessage<List<EnvironmentData>> getEnvironmentDataList() {
-        List<EnvironmentData> result=environmentDataService.getEnvironmentDataList();
+    public ResponseMessage<List<EnvironmentData>> getEnvironmentDataList(@RequestParam Integer deviceId) {
+        List<EnvironmentData> result=environmentDataService.getEnvironmentDataList(deviceId);
         return ResponseMessage.success(result);
     }
 

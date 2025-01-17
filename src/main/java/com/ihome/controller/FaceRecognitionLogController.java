@@ -30,8 +30,8 @@ public class FaceRecognitionLogController {
 
     //获取人脸识别记录
     @GetMapping("/getRecordList")
-    public ResponseMessage<List<FaceRecognitionLog>> getRecordList() {
-        List<FaceRecognitionLog> result=faceRecognitionLogService.getRecordList();
+    public ResponseMessage<List<FaceRecognitionLog>> getRecordList(Integer deviceId) {
+        List<FaceRecognitionLog> result=faceRecognitionLogService.getRecordList(deviceId);
         return ResponseMessage.success(result);
     }
 

@@ -29,5 +29,5 @@ public interface LightPreferService {
      * 获取记录列表
      * @return
      */
-    List<LightPrefer> getRecordList();
+    List<LightPrefer> getRecordList(Integer deviceId);
 }

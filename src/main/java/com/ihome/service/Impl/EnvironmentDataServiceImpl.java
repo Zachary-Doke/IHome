@@ -31,8 +31,8 @@ public class EnvironmentDataServiceImpl implements EnvironmentDataService {
     }
 
     @Override
-    public List<EnvironmentData> getEnvironmentDataList() {
-        Iterable<EnvironmentData> iterator = environmentDataDao.findAll();
+    public List<EnvironmentData> getEnvironmentDataList(Integer deviceId) {
+        Iterable<EnvironmentData> iterator = environmentDataDao.findAllBydeviceId(deviceId);
         List<EnvironmentData> environmentList=new ArrayList<>();
         for(EnvironmentData EnvironmentData:iterator){
             environmentList.add(EnvironmentData);

@@ -38,8 +38,8 @@ public class LightPreferController {
 
     //获取灯光记录
     @GetMapping("/getRecordList")
-    public ResponseMessage<List<LightPrefer>> getRecordList() {
-        List<LightPrefer> result=lightPreferService.getRecordList();
+    public ResponseMessage<List<LightPrefer>> getRecordList(@RequestParam Integer deviceId) {
+        List<LightPrefer> result=lightPreferService.getRecordList(deviceId);
         return ResponseMessage.success(result);
     }
 

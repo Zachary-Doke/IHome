@@ -41,8 +41,8 @@ public class AcPreferController {
 
     //获取记录
     @GetMapping("/getRecordList")
-    public ResponseMessage<List<AcPrefer>> getRecordList() {
-        List<AcPrefer> result=acPreferService.getRecordList();
+    public ResponseMessage<List<AcPrefer>> getRecordList(Integer deviceId) {
+        List<AcPrefer> result=acPreferService.getRecordList(deviceId);
         return ResponseMessage.success(result);
     }
 

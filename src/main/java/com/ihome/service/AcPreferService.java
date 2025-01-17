@@ -29,5 +29,5 @@ public interface AcPreferService {
      * 获取记录列表
      * @return
      */
-    List<AcPrefer> getRecordList();
+    List<AcPrefer> getRecordList(Integer deviceId);
 }

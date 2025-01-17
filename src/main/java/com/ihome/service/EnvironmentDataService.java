@@ -30,5 +30,5 @@ public interface EnvironmentDataService {
      * 查询数据
      * @return
      */
-    List<EnvironmentData> getEnvironmentDataList();
+    List<EnvironmentData> getEnvironmentDataList(Integer deviceId);
 }
