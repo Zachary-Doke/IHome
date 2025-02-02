@@ -39,7 +39,17 @@ public class Device implements Serializable {
     /**
      * 操作参数
      */
-    private Double parameters;
+    private String parameters;
+
+    private String productKey;
+
+    public String getProductKey() {
+        return productKey;
+    }
+
+    public void setProductKey(String productKey) {
+        this.productKey = productKey;
+    }
 
     public Integer getId() {
         return id;
@@ -81,11 +91,11 @@ public class Device implements Serializable {
         this.status = status;
     }
 
-    public Double getParameters() {
+    public String getParameters() {
         return parameters;
     }
 
-    public void setParameters(Double parameters) {
+    public void setParameters(String parameters) {
         this.parameters = parameters;
     }
 }

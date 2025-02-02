@@ -8,6 +8,7 @@ public class IHomeApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(IHomeApplication.class, args);
+        //new arcFace().acrfaces();
     }
 
 }

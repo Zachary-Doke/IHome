@@ -23,7 +23,7 @@ public class ArcFaceService {
     private ArcFaceDao arcFaceDao;
 
     public FaceEngine imageEngineInit() {
-        FaceEngine faceEngine = new FaceEngine("E:\\JavaProject\\IHome\\src\\main\\resources\\libs\\WIN64");
+        FaceEngine faceEngine = new FaceEngine("E:\\Java\\Project\\IHome\\src\\main\\resources\\libs\\WIN64");
 
         // 配置引擎模式为image
         EngineConfiguration engineConfiguration = new EngineConfiguration();

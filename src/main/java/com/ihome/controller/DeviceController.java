@@ -2,7 +2,6 @@ package com.ihome.controller;
 
 import com.ihome.pojo.Device;
 import com.ihome.pojo.ResponseMessage;
-import com.ihome.pojo.User;
 import com.ihome.service.DeviceService;
 import com.ihome.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,14 @@ public class DeviceController {
 
     //添加设备
     @PostMapping("/addDevice")
-    public ResponseMessage<Device> addDevice(@RequestBody Device device) {
-        Device result=deviceService.addDevice(device);
+    public ResponseMessage<Device> addDevice(@RequestBody Device device, int userId) {
+        Device result=deviceService.addDevice(device,userId);
+        return ResponseMessage.success(result);
+    }
+
+    @PostMapping("/saveDevice")
+    public ResponseMessage<Device> saveDevice(@RequestBody Device device) {
+        Device result=deviceService.saveDevice(device);
         return ResponseMessage.success(result);
     }
 
@@ -58,14 +63,14 @@ public class DeviceController {
     @GetMapping("/openDevice")
     public ResponseMessage<String> openDevice(@RequestParam Integer deviceId) {
         Device device=deviceService.getDeviceById(deviceId);
-        if(device.getStatus().equals("open")){
+        if(device.getStatus().equals("1")){
             return ResponseMessage.success("设备已经开启");
         }
 
         /*向设备发送命令并检查结果*/
 
         if(true/*设备成功启动*/){
-            device.setStatus("open");
+            device.setStatus("1");
             deviceService.updateDevice(device);
             return ResponseMessage.success("设备启动成功");
         }else {
@@ -77,14 +82,14 @@ public class DeviceController {
     @GetMapping("/shutDevice")
     public ResponseMessage<String> shutDevice(@RequestParam Integer deviceId) {
         Device device=deviceService.getDeviceById(deviceId);
-        if(device.getStatus().equals("close")){
+        if(device.getStatus().equals("0")){
             return ResponseMessage.success("设备已经关闭");
         }
 
         /*向设备发送命令并检查结果*/
 
         if(true/*设备成功关闭*/){
-            device.setStatus("close");
+            device.setStatus("0");
             deviceService.updateDevice(device);
             return ResponseMessage.success("设备关闭成功");
         }else {
@@ -96,7 +101,7 @@ public class DeviceController {
     @PostMapping("/adjustLight")
     public ResponseMessage<String> adjustLight(@RequestBody Device request) {
         Integer deviceId = request.getId();
-        Double parameters = request.getParameters();
+        String parameters = request.getParameters();
 
         Device device=deviceService.getDeviceById(deviceId);
         if(!device.getType().equals("light")){
@@ -118,7 +123,7 @@ public class DeviceController {
     @PostMapping("/adjustAc")
     public ResponseMessage<String> adjustAc(@RequestBody Device request) {
         Integer deviceId = request.getId();
-        Double parameters = request.getParameters();
+        String parameters = request.getParameters();
 
         Device device=deviceService.getDeviceById(deviceId);
         if(!device.getType().equals("airConditioner")){

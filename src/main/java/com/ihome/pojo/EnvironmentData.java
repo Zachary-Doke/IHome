@@ -32,11 +32,11 @@ public class EnvironmentData implements Serializable {
     /**
     * 光照强度
     */
-    private Double lightLevlel;
+    private Double lightLevel;
     /**
     * 数据采集时间
     */
-    private Date create;
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -70,19 +70,19 @@ public class EnvironmentData implements Serializable {
         this.humidity = humidity;
     }
 
-    public Double getLightLevlel() {
-        return lightLevlel;
+    public Double getLightLevel() {
+        return lightLevel;
     }
 
-    public void setLightLevlel(Double lightLevlel) {
-        this.lightLevlel = lightLevlel;
+    public void setLightLevel(Double lightLevlel) {
+        this.lightLevel = lightLevlel;
     }
 
-    public Date getCreate() {
-        return create;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate(Date create) {
-        this.create = create;
+    public void setCreateTime(Date create) {
+        this.createTime = create;
     }
 }

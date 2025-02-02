@@ -1,5 +1,9 @@
 package com.ihome.job;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ihome.controller.DeviceController;
+import com.ihome.pojo.Device;
 import com.ihome.properties.AliIotConfigProperties;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.qpid.jms.JmsConnection;
@@ -24,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Component
 public class AmqpClient implements ApplicationRunner {
@@ -31,6 +37,8 @@ public class AmqpClient implements ApplicationRunner {
 
     @Autowired
     private AliIotConfigProperties aliIotConfigProperties;
+    @Autowired
+    private DeviceController deviceController;
 
     //控制台服务端订阅中消费组状态页客户端ID一栏将显示clientId参数
 
@@ -99,7 +107,6 @@ public class AmqpClient implements ApplicationRunner {
             consumer.setMessageListener(messageListener);
         }
 
-        logger.info("amqp demo is started successfully, and will exit after 60s ");
     }
 
     private MessageListener messageListener = message -> {
@@ -114,7 +121,7 @@ public class AmqpClient implements ApplicationRunner {
     /**
      * 在这里处理您收到消息后的具体业务逻辑。
      */
-    private static void processMessage(Message message) {
+    private void processMessage(Message message) {
         try {
             byte[] body = message.getBody(byte[].class);
             String content = new String(body);
@@ -124,6 +131,38 @@ public class AmqpClient implements ApplicationRunner {
                     + ",\n topic = " + topic
                     + ",\n messageId = " + messageId
                     + ",\n content = " + content);
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                JsonNode rootNode = objectMapper.readTree(content);
+
+                // 获取基本属性
+                String deviceType = rootNode.path("deviceType").asText();
+                String deviceName = rootNode.path("deviceName").asText();
+                String deviceProductKey = rootNode.path("productKey").asText();
+                long gmtCreate = rootNode.path("gmtCreate").asLong();
+
+                if (deviceType.equals(null)) return;
+
+                // 获取items中的数据
+                JsonNode itemsNode = rootNode.path("items");
+                String itemsString = itemsNode.toString();
+                int powerSwitchValue = itemsNode.path("PowerSwitch").path("value").asInt();
+//                int currentTemperatureValue = itemsNode.path("CurrentTemperature").path("value").asInt();
+//                int targetTemperatureValue = itemsNode.path("TargetTemperature").path("value").asInt();
+//                int windSpeedValue = itemsNode.path("WindSpeed").path("value").asInt();
+//                int workModeValue = itemsNode.path("WorkMode").path("value").asInt();
+
+                Device device = new Device();
+                device.setName(deviceName);
+                device.setType(deviceType);
+                device.setStatus(String.valueOf(powerSwitchValue));
+                device.setParameters(itemsString);
+                device.setProductKey(deviceProductKey);
+                this.deviceController.saveDevice(device);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } catch (Exception e) {
             logger.error("processMessage occurs error ", e);
         }
