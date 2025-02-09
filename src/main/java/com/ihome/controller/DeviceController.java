@@ -20,8 +20,8 @@ public class DeviceController {
 
     //添加设备
     @PostMapping("/addDevice")
-    public ResponseMessage<Device> addDevice(@RequestBody Device device, int userId) {
-        Device result=deviceService.addDevice(device,userId);
+    public ResponseMessage<Device> addDevice(@RequestBody Device device) {
+        Device result=deviceService.addDevice(device);
         return ResponseMessage.success(result);
     }
 
@@ -38,9 +38,18 @@ public class DeviceController {
         return ResponseMessage.success("已执行删除操作");
     }
 
+    //删除设备
+    @DeleteMapping("/deleteDeviceByIds/{deviceIds}")
+    public ResponseMessage<String> deleteDeviceById(@PathVariable Integer[] deviceIds) {
+        deviceService.deleteDeviceByIds(deviceIds);
+        return ResponseMessage.success("已执行删除操作");
+    }
+
     //更新设备信息
     @PutMapping("/updateDevice")
     public ResponseMessage<Device> updateDevice(@RequestBody Device device) {
+        System.out.println(device.getName());
+        System.out.println(device.getParameters());
         Device result=deviceService.updateDevice(device);
         return ResponseMessage.success(result);
     }
@@ -56,6 +65,18 @@ public class DeviceController {
     @GetMapping("/getDeviceList")
     public ResponseMessage<List<Device>> getDeviceList(@RequestParam Integer userId) {
         List<Device> result=deviceService.getDeviceList(userId);
+        return ResponseMessage.success(result);
+    }
+
+    @GetMapping("/getDeviceListByType")
+    public ResponseMessage<List<Device>> getDeviceListByType(@RequestParam Integer userId,String type) {
+        List<Device> result=deviceService.getDeviceListByType(userId,type);
+        return ResponseMessage.success(result);
+    }
+
+    @GetMapping("/getDeviceListByDevice")
+    public ResponseMessage<List<Device>> getDeviceListByDevice(@RequestParam String name,String type,String status,Integer userId) {
+        List<Device> result=deviceService.getDeviceListByDevice(name,type,status,userId);
         return ResponseMessage.success(result);
     }
 

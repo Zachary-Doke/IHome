@@ -1,11 +1,5 @@
 package com.ihome.service.Impl;
 
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
-import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.iot.model.v20180120.PubRequest;
-import com.aliyuncs.iot.model.v20180120.PubResponse;
-import com.aliyuncs.profile.DefaultProfile;
 import com.ihome.dao.DeviceDao;
 import com.ihome.pojo.AcPrefer;
 import com.ihome.pojo.Device;
@@ -14,7 +8,6 @@ import com.ihome.pojo.LightPrefer;
 import com.ihome.properties.AliIotConfigProperties;
 import com.ihome.service.AcPreferService;
 import com.ihome.service.DeviceService;
-import org.apache.commons.codec.binary.Base64;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,8 +36,7 @@ public class DeviceServiceImpl implements DeviceService {
     private final Lock lock = new ReentrantLock();
 
     @Override
-    public Device addDevice(Device device, int userId) {
-        device.setUserId(userId);
+    public Device addDevice(Device device) {
         return deviceDao.save(device);
     }
 
@@ -107,7 +99,9 @@ public class DeviceServiceImpl implements DeviceService {
 //            System.out.println("ErrMsg:" + e.getErrMsg());
 //            e.printStackTrace();
 //        }
-
+        if (device.getParameters() == null || device.getParameters().trim().isEmpty()) {
+            throw new IllegalArgumentException("Parameters cannot be null or empty");
+        }
         JSONObject jsonObject = new JSONObject(device.getParameters());
 
         if (device.getType().equals("Airconditionerthermostat")) {
@@ -156,6 +150,37 @@ public class DeviceServiceImpl implements DeviceService {
         List<Device> deviceList=new ArrayList<>();
         for(Device device:iterator){
             deviceList.add(device);
+        }
+        return deviceList;
+    }
+
+    @Override
+    public List<Device> getDeviceListByType(Integer userId,String type) {
+        Iterable<Device> iterator = deviceDao.findAll();
+        List<Device> deviceList=new ArrayList<>();
+        for(Device device:iterator){
+            if(device.getUserId() == null || device.getType() == null) continue;
+            if(device.getType().equals(type) && device.getUserId().equals(userId)) deviceList.add(device);
+        }
+        return deviceList;
+    }
+
+    @Override
+    public void deleteDeviceByIds(Integer[] deviceIds) {
+        for(Integer deviceId: deviceIds) {
+            deviceDao.deleteById(deviceId);
+        }
+    }
+
+    @Override
+    public List<Device> getDeviceListByDevice(String name,String type,String status,Integer userId) {
+        Iterable<Device> iterator = deviceDao.findAll();
+        List<Device> deviceList=new ArrayList<>();
+        for(Device devices :iterator){
+            if(name != null && name.equals(devices.getName()) ||
+               userId != null && userId.equals(devices.getUserId()) ||
+               type != null && type.equals(devices.getType()) ||
+               status != null && status.equals(devices.getStatus()) ) deviceList.add(devices);
         }
         return deviceList;
     }
