@@ -35,6 +35,7 @@ public class CameraController {
                 break;
             }
         }
+
         return ResponseMessage.success(flag);
     }
 

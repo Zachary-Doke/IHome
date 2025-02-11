@@ -43,6 +43,12 @@ public class FaceDataController {
         return ResponseMessage.success(result);
     }
 
+    @GetMapping("/getFaceDataListByUserId")
+    public ResponseMessage<List<FaceData>> getFaceDataListByUserId(@RequestParam Integer userId) {
+        List<FaceData> result=faceDataService.getFaceDataListByUserId(userId);
+        return ResponseMessage.success(result);
+    }
+
     //获取人脸数据列表
     @GetMapping("/getFaceDataList")
     public ResponseMessage<List<FaceData>> getFaceDataList() {

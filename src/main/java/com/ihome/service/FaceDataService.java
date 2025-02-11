@@ -10,6 +10,7 @@ public interface FaceDataService {
      * @param faceData
      * @return
      */
+
     FaceData addFaceData(FaceData faceData);
 
     /**
@@ -37,4 +38,6 @@ public interface FaceDataService {
      * @return
      */
     List<FaceData> getFaceDataList();
+
+    List<FaceData> getFaceDataListByUserId(Integer userId);
 }

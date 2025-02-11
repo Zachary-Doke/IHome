@@ -103,12 +103,10 @@ public class ArcFaceService {
         List<FaceFeature> featureList = new ArrayList<>();
         for (String imagePath : imagePathList){
             FaceEngine faceEngine=imageEngineInit();
-
             //封装帧为ImageInfo
             File image = new File(imagePath);
             ImageInfo imageInfo = ImageFactory.getRGBData(image);
             int errorCode = 0;
-
             //人脸检测
             List<FaceInfo> faceInfoList = new ArrayList<FaceInfo>();
             errorCode = faceEngine.detectFaces(imageInfo, faceInfoList);
@@ -156,7 +154,6 @@ public class ArcFaceService {
         faceData.setUserId(userId);
         faceData.setFaceFeature(finalFeatureData);
         arcFaceDao.save(faceData);
-
 
     }
 
