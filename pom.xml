@@ -116,6 +116,11 @@
             <version>4.10.0</version>
             <systemPath>E:/JavaProject/IHome/src/main/resources/lib.opencv/opencv-4100.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20250107</version>
+        </dependency>
     </dependencies>
 
     <build>
